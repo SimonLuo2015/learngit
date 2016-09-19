@@ -143,6 +143,7 @@ app = wx.App(False)
 top = StockFrame("Dow Jones Industrial Average (^DJI)")
 top.Show(True)
 
+# 下载道琼斯工业平均指数的前三位
 str = urllib.urlopen('http://finance.yahoo.com/q/cp?s=%5EDJI+Components').read()
 #print str
 m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\".*?\">(.*?)</a></b></td><td class=\"yfnc_tabledata1\">(.*?)</td>.*?<b>(.*?)</b>.*?</tr>", str)
