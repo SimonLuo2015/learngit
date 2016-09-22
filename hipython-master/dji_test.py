@@ -133,26 +133,29 @@ class StockFrame(wx.Frame):
         self.Fit()'''
 
     def setData(self, data):
-        self.list.ClearAll()
-        self.list.InsertColumn(0,"Symbol")
-        self.list.InsertColumn(1,"Name")
-        self.list.InsertColumn(2,"Last Trade")  
+        # 设置列表框中的数据
+        self.reportList.ClearAll()
+        # 依然要先设置表头信息，需要注意。
+        self.reportList.InsertColumn(0,"Symbol")
+        self.reportList.InsertColumn(1,"Name")
+        self.reportList.InsertColumn(2,"Last Trade")  
+
+        # ？？？？？？
         pos = 0
         for row in data:
             # This one looks neater but cannot replace the "&amp;"
             #self.list.Append(row)            
-            pos = self.list.InsertStringItem(pos+1, row[0])
-            self.list.SetStringItem(pos, 1, row[1].replace("&amp;", "&"))
-            self.list.SetColumnWidth(1, -1)
-            self.list.SetStringItem(pos, 2, row[2])
+            pos = self.reportList.InsertStringItem(pos+1, row[0])
+            self.reportList.SetStringItem(pos, 1, row[1].replace("&amp;", "&"))
+            self.reportList.SetColumnWidth(1, -1)
+            self.reportList.SetStringItem(pos, 2, row[2])
             if (pos % 2 == 0):
                 # Get the item at a specific index:
                 #item = self.list.GetItem(pos)
-                self.list.SetItemBackgroundColour(pos, (134, 225, 249))
+                self.reportList.SetItemBackgroundColour(pos, (134, 225, 249))
                 # Set new look and feel back to the list
                 #self.list.SetItem(item)
         self.FitInside()
-        pass
         
     def GetAllSelected(self):
         selection = []
@@ -164,11 +167,11 @@ class StockFrame(wx.Frame):
             if next == -1:
                 return selection
 
-            selection.append(self.list.GetItemText(next))
+            selection.append(self.reportList.GetItemText(next))
             current = next
 
     def GetNextSelected(self, current):
-        return self.list.GetNextItem(current,
+        return self.reportList.GetNextItem(current,
                                 wx.LIST_NEXT_ALL,
                                 wx.LIST_STATE_SELECTED)
 
