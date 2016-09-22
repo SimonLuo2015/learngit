@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 '''Hello, wxPython! program.'''
 import wx
@@ -6,9 +5,7 @@ import wx
 class Frame(wx.Frame):
     '''Frame class that display an image.'''
 
-    def __init__(self, image, parent=None, id=-1,
-                pos=wx.DefaultPosition,
-                title='Hello, wxPython!'):
+    def __init__(self, image, parent=None, id=-1, pos=wx.DefaultPosition, title='Hello, wxPython!'):
         '''create a Frame instance and display image.'''
         temp = image.ConvertToBitmap()
         size = temp.GetWidth(), temp.GetHeight()
@@ -19,6 +16,7 @@ class App(wx.App):
     '''Application class'''
     
     def OnInit(self):
+        '''Init the app'''
         image = wx.Image('googlelogo.jpg', wx.BITMAP_TYPE_JPEG)
         self.frame = Frame(image)
 
@@ -32,3 +30,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
