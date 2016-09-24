@@ -7,7 +7,7 @@ class SubclassDialog(wx.Dialog):
         okButton = wx.Button(self, wx.ID_OK, 'OK', pos=(15, 15))
         okButton.SetDefault()
         cancelButton = wx.Button(self, wx.ID_CANCEL, 'Cancel', pos=(115, 15))
-        # cancelButton.SetDefault()
+        cancelButton.SetDefault()
 
 if __name__ == '__main__':
     app = wx.PySimpleApp()
