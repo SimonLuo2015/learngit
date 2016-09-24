@@ -22,15 +22,19 @@ class ChangeDepthDialog(wx.Dialog):
         self.SetTitle("Configure Data")
         
     def InitUI(self):
+        # 5个可勾选的内容。
         self.option_list = ['open', 'close', 'high', 'low', 'volume']
-        
+
+        # 新建一个panel。
         pnl = wx.Panel(self)
+        # 新建两个boxsizer，一个纵向，一个横向。
         vbox = wx.BoxSizer(wx.VERTICAL)
         hbox = wx.BoxSizer(wx.HORIZONTAL)
 
         sb = wx.StaticBox(pnl, label='Data Range')
         sbs = wx.StaticBoxSizer(sb, orient=wx.VERTICAL) 
-        
+
+        # 下面的-1表示使用默认分配的id
         sbs.Add(wx.StaticText(pnl, -1, r'Start Date'))
         self.dc_start = wx.DatePickerCtrl(pnl, -1, style=wx.DP_DROPDOWN, pos=(130, 70))
         sbs.Add(self.dc_start)
@@ -82,11 +86,24 @@ class ChangeDepthDialog(wx.Dialog):
         print self.dc_start.GetValue(), self.dc_end.GetValue()
         quotespd.PlotData(code = self.code, start = self.dc_start.GetValue(), end = self.dc_end.GetValue(), list = l)
         #self.Destroy()
+#
+# def ConfigureData(codes):
+#     print "codes in dialogs", codes
+#     ex = wx.App()
+#     print "retrived the first code", codes[0]
+#     cd = ChangeDepthDialog(None)
+#     cd.ShowDialog(codes[0])
+#     ex.MainLoop()
 
-def ConfigureData(codes):
-    print "codes in dialogs", codes
-    ex = wx.App()
-    print "retrived the first code", codes[0]
-    cd = ChangeDepthDialog(None)
-    cd.ShowDialog(codes[0])
-    ex.MainLoop()
+
+if __name__ == '__main__':
+    app = wx.PySimpleApp()
+    app.MainLoop()
+    dialog = ChangeDepthDialog(None)
+    # # 显示模式对话框
+    result = dialog.ShowModal()
+    # if result == wx.ID_OK:
+    #     print 'OK'
+    # else:
+    #     print 'Cancel'
+    dialog.Destroy()
