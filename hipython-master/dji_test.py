@@ -142,9 +142,11 @@ class StockFrame(wx.Frame):
 
         # ？？？？？？
         pos = 0
+        # 增加行
         for row in data:
             # This one looks neater but cannot replace the "&amp;"
-            #self.list.Append(row)            
+            #self.list.Append(row) 
+            # InsertStringItem(index, label) 插入文本到列表中。           
             pos = self.reportList.InsertStringItem(pos+1, row[0])
             self.reportList.SetStringItem(pos, 1, row[1].replace("&amp;", "&"))
             self.reportList.SetColumnWidth(1, -1)
@@ -155,6 +157,9 @@ class StockFrame(wx.Frame):
                 self.reportList.SetItemBackgroundColour(pos, (134, 225, 249))
                 # Set new look and feel back to the list
                 #self.list.SetItem(item)
+        # 调整window尺寸以匹配sizer认为所需要的最小化尺寸，参数值通常使用sizer窗口。
+        # FtiInside()是类似方法，只不过将改变窗口在屏幕上的显示替换为只改变他的内部实现，
+        # 它用于scroll panel中的窗口以出发滚动栏的显示。
         self.FitInside()
         
     def GetAllSelected(self):
