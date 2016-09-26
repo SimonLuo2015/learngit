@@ -28,10 +28,14 @@ class ChangeDepthDialog(wx.Dialog):
         # 新建一个panel。
         pnl = wx.Panel(self)
         # 新建两个boxsizer，一个纵向，一个横向。
+        # wx.BoxSizer：在一条水平或垂直线上的窗口部件的布局，当尺寸改变时，在控制窗口部件的行为上很灵活。
+        # 通常用于嵌套的样式，可用于几乎任何类型的布局。
         vbox = wx.BoxSizer(wx.VERTICAL)
         hbox = wx.BoxSizer(wx.HORIZONTAL)
 
+        # 创建一个名叫sb的静态框。
         sb = wx.StaticBox(pnl, label='Data Range')
+        # wx.StaticBoxSizer是wx.BoxSizer的子类，它的构造函数要求的参数是（静态框）和方向。
         sbs = wx.StaticBoxSizer(sb, orient=wx.VERTICAL) 
 
         # 下面的-1表示使用默认分配的id
@@ -43,6 +47,7 @@ class ChangeDepthDialog(wx.Dialog):
         sbs.Add(self.dc_end)
         pnl.SetSizer(sbs)
 
+        # 再新建一个panel？？为什么要新建？
         pnl2 = wx.Panel(self)
         sb2 = wx.StaticBox(pnl2, label='Data Set')
         sbs2 = wx.StaticBoxSizer(sb2, orient=wx.VERTICAL)        
@@ -52,8 +57,8 @@ class ChangeDepthDialog(wx.Dialog):
             sbs2.Add(cb)
             self.cb_list.append(cb)
         
-         
         pnl2.SetSizer(sbs2)
+        # 在一个dialog下，有两个panel面板？？然后使用hbox来将两个panel进行横向排列？
         hbox.Add(pnl)
         hbox.Add(pnl2)
        
