@@ -97,7 +97,7 @@ class ChangeDepthDialog(wx.Dialog):
         
         # 将okButton按钮与OnClose方法绑定，只要该按钮被触碰，Onclose方法就执行。
         okButton.Bind(wx.EVT_BUTTON, self.OnClose)
-        # 同上。
+        # 这里还需要调整，closeButton按钮绑定的应该是关闭方法，而不应该是OnClose方法！！
         closeButton.Bind(wx.EVT_BUTTON, self.OnClose)
     
     def ShowDialog(self, code1):
