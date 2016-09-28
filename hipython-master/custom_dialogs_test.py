@@ -99,6 +99,8 @@ class ChangeDepthDialog(wx.Dialog):
         closeButton.Bind(wx.EVT_BUTTON, self.OnClose)
     
     def ShowDialog(self, code1):
+        # 该方法用于指定准备展示那个公司的股票信息，将code1值获取到。
+        # code1为代码，如IBM。
         self.code = code1
         self.Show(True)
         
@@ -110,26 +112,39 @@ class ChangeDepthDialog(wx.Dialog):
         print l
         print self.code
         print self.dc_start.GetValue(), self.dc_end.GetValue()
-        quotespd.PlotData(code = self.code, start = self.dc_start.GetValue(), end = self.dc_end.GetValue(), list = l)
+        quotespd.PlotData(code=self.code, start=self.dc_start.GetValue(), end=self.dc_end.GetValue(), list=l)
         #self.Destroy()
-#
-# def ConfigureData(codes):
-#     print "codes in dialogs", codes
-#     ex = wx.App()
-#     print "retrived the first code", codes[0]
-#     cd = ChangeDepthDialog(None)
-#     cd.ShowDialog(codes[0])
-#     ex.MainLoop()
+
+
+def ConfigureData(codes):
+    '''
+    create a instance of ChangeDepthDialog class.
+    :param codes:
+    :return:
+    '''
+    # 新建一个app实例。
+    print "codes in dialogs", codes
+    ex = wx.wx.App(False)
+    print "retrived the first code", codes[0]
+    # 新建ChangeDepthDialog类型的实例。
+    cd = ChangeDepthDialog(None)
+
+    # 指定再跳出窗口要显示哪一个公司的股票信息。
+    cd.ShowDialog(codes[0])
+    ex.MainLoop()
 
 
 if __name__ == '__main__':
-    app = wx.PySimpleApp()
-    app.MainLoop()
-    dialog = ChangeDepthDialog(None)
-    # # 显示模式对话框
-    result = dialog.ShowModal()
-    # if result == wx.ID_OK:
-    #     print 'OK'
-    # else:
-    #     print 'Cancel'
-    dialog.Destroy()
+    # app = wx.PySimpleApp()
+    # app.MainLoop()
+    # dialog = ChangeDepthDialog(None)
+    # # # 显示模式对话框
+    # result = dialog.ShowModal()
+    # # if result == wx.ID_OK:
+    # #     print 'OK'
+    # # else:
+    # #     print 'Cancel'
+    # dialog.Destroy()
+
+    codes = ['IBM']
+    ConfigureData(codes)
