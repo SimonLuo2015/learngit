@@ -21,7 +21,7 @@ for i in range(0,len(quotes)):
 
 quotesdf = pd.DataFrame(quotes, index = list1, columns = fields)
 quotesdf = quotesdf.drop(['date'], axis = 1)
-# print quotesdf.head()
+print quotesdf.head()
 
 #测试的输出结果如下，表明以上程序正确。
 #                   open       close        high         low     volume

@@ -77,7 +77,7 @@ class ChangeDepthDialog(wx.Dialog):
 
         # 在一个dialog下，有两个panel面板？？然后使用hbox来将两个panel进行横向排列？
         # 将两个面板加入到bhox的纵向box sizer中。
-        # pnl与pnl2是
+        # pnl与pnl2是容器？
         hbox.Add(pnl)
         hbox.Add(pnl2)
        
@@ -95,7 +95,9 @@ class ChangeDepthDialog(wx.Dialog):
         # 这个box sizer是最高级的，其他的box sizer都是和下面的panel这些小的容器关联，都是下级。
         self.SetSizer(vbox)
         
+        # 将okButton按钮与OnClose方法绑定，只要该按钮被触碰，Onclose方法就执行。
         okButton.Bind(wx.EVT_BUTTON, self.OnClose)
+        # 同上。
         closeButton.Bind(wx.EVT_BUTTON, self.OnClose)
     
     def ShowDialog(self, code1):
@@ -105,14 +107,21 @@ class ChangeDepthDialog(wx.Dialog):
         self.Show(True)
         
     def OnClose(self, e):
+        # 点击okButton后触发的操作。
+        
+
+        # 获取所有的check_box实例
         l = []
         for i, cb in enumerate(self.cb_list):
+            # 如果check box有值，不为空，就将对应的'open'等字段插入到选择列表中待用。
             if cb.GetValue():
                 l.append(self.option_list[i])
         print l
+        # 显示ShowDialog函数选取的code值是什么？
         print self.code
         print self.dc_start.GetValue(), self.dc_end.GetValue()
-        quotespd.PlotData(code=self.code, start=self.dc_start.GetValue(), end=self.dc_end.GetValue(), list=l)
+        # list2=l中，l代表了check box选择了哪几个项。
+        quotespd.PlotData(code=self.code, start=self.dc_start.GetValue(), end=self.dc_end.GetValue(), list2=l)
         #self.Destroy()
 
 
