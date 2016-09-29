@@ -2,11 +2,15 @@
 import urllib
 import re
 import wx
+from custom_dialogs import ConfigureData
 
 # 下载道琼斯工业平均指数的前三位
-# str = urllib.urlopen('http://finance.yahoo.com/q/cp?s=%5EDJI+Components').read()
-# print str
-# m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\".*?\">(.*?)</a></b></td><td class=\"yfnc_tabledata1\">(.*?)</td>.*?<b>(.*?)</b>.*?</tr>", str)
+str = urllib.urlopen('http://finance.yahoo.com/q/cp?s=%5EDJI+Components').read()
+# 验证过，这里str可以把网页源代码下载下来。
+print str
+# 问题在这里，这个re的正则表达式已经没法匹配到数据了。
+m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\".*?\">(.*?)</a></b></td><td class=\"yfnc_tabledata1\">(.*?)</td>.*?<b>(.*?)</b>.*?</tr>", str)
+# print m
 
 # if m:
 #     #print m
@@ -183,7 +187,7 @@ class StockFrame(wx.Frame):
     def OnClick(self, event):
         codes = self.GetAllSelected()
         print "code in DJI", codes
-        # ConfigureData(codes)
+        ConfigureData(codes)
         
     def OnAbout(self, event):
         dlg = wx.MessageDialog(self, "A small text editor", "About Sample Editor", wx.OK)
@@ -194,12 +198,31 @@ class StockFrame(wx.Frame):
         self.Close()
         self.Destroy()
         
+    # onRefresh函数需要重写，保证实现刷新重写读取
     def onRefresh(self, event):
         pass
 
-app = wx.App(False)
 
-top = StockFrame("Dow Jones Industrial Average (^DJI)")
-top.Show(True)
 
-app.MainLoop()
+
+if __name__ == '__main__':
+
+    app = wx.App(False)
+
+    top = StockFrame("Dow Jones Industrial Average (^DJI)")
+    top.Show(True)
+
+    # # 下载道琼斯工业平均指数的前三位
+    # str = urllib.urlopen('http://finance.yahoo.com/q/cp?s=%5EDJI+Components').read()
+    # #print str
+    # m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\".*?\">(.*?)</a></b></td><td class=\"yfnc_tabledata1\">(.*?)</td>.*?<b>(.*?)</b>.*?</tr>", str)
+    # if m:
+    #     #print m
+    #     #print"\n"
+    #     print len(m)
+    #     top.setData(m)
+    # else:  
+    #     wx.MessageBox('Download failed.', 'Message',  wx.OK | wx.ICON_INFORMATION)
+
+
+    app.MainLoop()
