@@ -126,6 +126,7 @@ class ChangeDepthDialog(wx.Dialog):
 
     def OnClose(self, event):
         self.Close(True)
+        self.Destroy()
 
 def ConfigureData(codes):
     '''
