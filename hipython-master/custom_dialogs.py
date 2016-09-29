@@ -61,14 +61,14 @@ class ChangeDepthDialog(wx.Dialog):
 
         self.SetSizer(vbox)
         
-        okButton.Bind(wx.EVT_BUTTON, self.OnClose)
+        okButton.Bind(wx.EVT_BUTTON, self.OnOpen)
         closeButton.Bind(wx.EVT_BUTTON, self.OnClose)
     
     def ShowDialog(self, code1):
         self.code = code1
         self.Show(True)
         
-    def OnClose(self, e):
+    def OnOpen(self, event):
         l = []
         for i, cb in enumerate(self.cb_list):
             if cb.GetValue():
@@ -76,8 +76,12 @@ class ChangeDepthDialog(wx.Dialog):
         print l
         print self.code
         print self.dc_start.GetValue(), self.dc_end.GetValue()
-        quotespd.PlotData(code = self.code, start = self.dc_start.GetValue(), end = self.dc_end.GetValue(), list = l)
+        quotespd.PlotData(code=self.code, start=self.dc_start.GetValue(), end=self.dc_end.GetValue(), list2=l)
         #self.Destroy()
+    
+    def OnClose(self, event):
+        self.Close(True)
+        self.Destroy()
 
 def ConfigureData(codes):
     print "codes in dialogs", codes
