@@ -96,7 +96,7 @@ class ChangeDepthDialog(wx.Dialog):
         self.SetSizer(vbox)
         
         # 将okButton按钮与OnClose方法绑定，只要该按钮被触碰，Onclose方法就执行。
-        okButton.Bind(wx.EVT_BUTTON, self.OnClose)
+        okButton.Bind(wx.EVT_BUTTON, self.OnOpen)
         # 这里还需要调整，closeButton按钮绑定的应该是关闭方法，而不应该是OnClose方法！！
         closeButton.Bind(wx.EVT_BUTTON, self.OnClose)
     
@@ -106,7 +106,7 @@ class ChangeDepthDialog(wx.Dialog):
         self.code = code1
         self.Show(True)
         
-    def OnClose(self, e):
+    def OnOpen(self, event):
         # 点击okButton后触发的操作。
         
 
@@ -122,8 +122,10 @@ class ChangeDepthDialog(wx.Dialog):
         print self.dc_start.GetValue(), self.dc_end.GetValue()
         # list2=l中，l代表了check box选择了哪几个项。
         quotespd.PlotData(code=self.code, start=self.dc_start.GetValue(), end=self.dc_end.GetValue(), list2=l)
-        #self.Destroy()
+        # self.Destroy()
 
+    def OnClose(self, event):
+        self.Close(True)
 
 def ConfigureData(codes):
     '''
