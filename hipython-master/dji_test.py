@@ -33,15 +33,15 @@ class StockFrame(wx.Frame):
         # 新增一个菜单
         filemenu= wx.Menu()
         # 将filemenu增加到菜单栏上，名称用&File标识。
-        menuBar.Append(filemenu,"&File")
+        menuBar.Append(filemenu, "&File")
         
         # 在新增的菜单上，增加具体的about子菜单
-        menuAbout = filemenu.Append(wx.ID_ABOUT, "&About"," Information about this program")
+        menuAbout = filemenu.Append(wx.ID_ABOUT, "&About", " Information about this program")
         # 在about子菜单下增加分隔符。
         filemenu.AppendSeparator()
 
         # 在新增加的菜单上，增加quit子菜单
-        menuQuit = filemenu.Append(wx.ID_EXIT,"Q&uit"," Terminate the program")
+        menuQuit = filemenu.Append(wx.ID_EXIT, "Q&uit", " Terminate the program")
 
         # 绑定两个子菜单的事件响应方法，就是说两个子菜单被触发了后会执行什么操作。
         self.Bind(wx.EVT_MENU, self.OnAbout, menuAbout)
@@ -186,7 +186,7 @@ class StockFrame(wx.Frame):
         # ConfigureData(codes)
         
     def OnAbout(self, event):
-        dlg = wx.MessageDialog( self, "A small text editor", "About Sample Editor", wx.OK)
+        dlg = wx.MessageDialog(self, "A small text editor", "About Sample Editor", wx.OK)
         dlg.ShowModal()
         dlg.Destroy()
 
