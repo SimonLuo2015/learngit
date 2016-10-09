@@ -8,8 +8,11 @@ from custom_dialogs import ConfigureData
 
 # 下载道琼斯工业平均指数的前三位
 # str = urllib.urlopen('http://finance.yahoo.com/q/cp?s=%5EDJI+Components').read()
+# 原来的yahoo英文站改版了，现在使用动态加载而不是原来的html表格版本的数据表示形式，
+# 因而原来的正则表达式不能匹配，现在改用香港的雅虎财经页面
+str = urllib.urlopen('https://hk.finance.yahoo.com/q/cp?s=%5EDJI%27').read()
 # # 验证过，这里str可以把网页源代码下载下来。
-# print str
+print str
 # # 问题在这里，这个re的正则表达式已经没法匹配到数据了。
 # m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\".*?\">(.*?)</a></b></td><td class=\"yfnc_tabledata1\">(.*?)</td>.*?<b>(.*?)</b>.*?</tr>", str)
 # # print m
@@ -28,10 +31,10 @@ from custom_dialogs import ConfigureData
 # print r.content
 
 # 尝试使用BeautifulSoup来解决问题
-str = urllib.urlopen('http://finance.yahoo.com/q/cp?s=%5EDJI+Components').read()
-print str
-soup = BeautifulSoup(str)
-print(soup.prettify())
+# str = urllib.urlopen('http://finance.yahoo.com/q/cp?s=%5EDJI+Components').read()
+# # print str
+# soup = BeautifulSoup(str)
+# print(soup.prettify())
 
 # 测试GUI图形界面能否正常显示
 class StockFrame(wx.Frame):
