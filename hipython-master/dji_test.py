@@ -16,6 +16,7 @@ str = urllib2.urlopen('https://hk.finance.yahoo.com/q/cp?s=%5EDJI%27').read()
 # # 验证过，这里str可以把网页源代码下载下来。
 # print str
 # # 问题在这里，这个re的正则表达式已经没法匹配到数据了。
+# m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\".*?\">(.*?)</a></b></td><td class=\"yfnc_tabledata1\">(.*?)</td>.*?<b>(.*?)</b>.*?</tr>", str)
 m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\".*?\">(.*?)</a></b></td><td class=\"yfnc_tabledata1\">(.*?)</td>.*?<b>(.*?)</b>.*?</tr>", str)
 print m
 
