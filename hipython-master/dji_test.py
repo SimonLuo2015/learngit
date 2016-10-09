@@ -2,15 +2,16 @@
 import urllib
 import re
 import wx
+import requests
 from custom_dialogs import ConfigureData
 
 # 下载道琼斯工业平均指数的前三位
-str = urllib.urlopen('http://finance.yahoo.com/q/cp?s=%5EDJI+Components').read()
-# 验证过，这里str可以把网页源代码下载下来。
-print str
-# 问题在这里，这个re的正则表达式已经没法匹配到数据了。
-m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\".*?\">(.*?)</a></b></td><td class=\"yfnc_tabledata1\">(.*?)</td>.*?<b>(.*?)</b>.*?</tr>", str)
-# print m
+# str = urllib.urlopen('http://finance.yahoo.com/q/cp?s=%5EDJI+Components').read()
+# # 验证过，这里str可以把网页源代码下载下来。
+# print str
+# # 问题在这里，这个re的正则表达式已经没法匹配到数据了。
+# m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\".*?\">(.*?)</a></b></td><td class=\"yfnc_tabledata1\">(.*?)</td>.*?<b>(.*?)</b>.*?</tr>", str)
+# # print m
 
 # if m:
 #     #print m
@@ -19,6 +20,11 @@ m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\".*?\">(.*?)</a></
 #     top.setData(m)
 # else:  
 #     wx.MessageBox('Download failed.', 'Message',  wx.OK | wx.ICON_INFORMATION)
+
+
+# 尝试使用requests模块来解决问题。
+# r = requests.get('http://finance.yahoo.com/q/cp?s=%5EDJI+Components')
+# print r.content
 
 
 # 测试GUI图形界面能否正常显示
