@@ -3,6 +3,7 @@ import urllib
 import re
 import wx
 import requests
+from bs4 import BeautifulSoup 
 from custom_dialogs import ConfigureData
 
 # 下载道琼斯工业平均指数的前三位
@@ -26,6 +27,11 @@ from custom_dialogs import ConfigureData
 # r = requests.get('http://finance.yahoo.com/q/cp?s=%5EDJI+Components')
 # print r.content
 
+# 尝试使用BeautifulSoup来解决问题
+str = urllib.urlopen('http://finance.yahoo.com/q/cp?s=%5EDJI+Components').read()
+print str
+soup = BeautifulSoup(str)
+print(soup.prettify())
 
 # 测试GUI图形界面能否正常显示
 class StockFrame(wx.Frame):
