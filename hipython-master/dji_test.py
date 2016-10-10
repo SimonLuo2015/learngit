@@ -214,10 +214,10 @@ class StockFrame(wx.Frame):
 
 if __name__ == '__main__':
 
-    app = wx.App(False)
+    # app = wx.App(False)
 
-    top = StockFrame("Dow Jones Industrial Average (^DJI)")
-    top.Show(True)
+    # top = StockFrame("Dow Jones Industrial Average (^DJI)")
+    # top.Show(True)
 
     # 下载道琼斯工业平均指数的前三位
     # str = urllib.urlopen('http://finance.yahoo.com/q/cp?s=%5EDJI+Components').read()
@@ -226,10 +226,13 @@ if __name__ == '__main__':
     # 因为改用https，所以这里改成了使用urllib2模块来读取https网址。
     str = urllib2.urlopen('https://hk.finance.yahoo.com/q/cp?s=%5EDJI%27').read()
     # # 验证过，这里str可以把网页源代码下载下来。
-    # print str
+    print str
     # # 问题在这里，这个re的正则表达式已经没法匹配到数据了。
     # m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\".*?\">(.*?)</a></b></td><td class=\"yfnc_tabledata1\">(.*?)</td>.*?<b>(.*?)</b>.*?</tr>", str)
-    m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\"/q?s=AAPL\">AAPL</a></b></td><td class=\"yfnc_tabledata1\">蘋果公司</td><td class=\"yfnc_tabledata1\" align=\"right\"><b>114.060</b>", str)
+    # m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\"/q?s=AAPL\">AAPL</a></b></td><td class=\"yfnc_tabledata1\">蘋果公司</td><td class=\"yfnc_tabledata1\" align=\"right\"><b>114.060</b>", str)
+    # Done!!！ 搞定！
+    m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\"/q\?s=[A-Z]+\">(\w+)</a></b></td><td class=\"yfnc_tabledata1\">(.*?)</td><td class=\"yfnc_tabledata1\" align=\"right\"><b>(\d*[.,]?\d*)</b>", str)
+    print m
     # if m:
     #     #print m
     #     #print"\n"
@@ -239,4 +242,4 @@ if __name__ == '__main__':
     #     wx.MessageBox('Download failed.', 'Message',  wx.OK | wx.ICON_INFORMATION)
 
 
-    app.MainLoop()
+    # app.MainLoop()
