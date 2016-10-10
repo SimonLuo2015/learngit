@@ -4,31 +4,20 @@ import urllib2
 import re
 import wx
 import requests
-from bs4 import BeautifulSoup 
+# from bs4 import BeautifulSoup 
 from custom_dialogs import ConfigureData
 
-# 下载道琼斯工业平均指数的前三位
-# str = urllib.urlopen('http://finance.yahoo.com/q/cp?s=%5EDJI+Components').read()
-# 原来的yahoo英文站改版了，现在使用动态加载而不是原来的html表格版本的数据表示形式，
-# 因而原来的正则表达式不能匹配，现在改用香港的雅虎财经页面
-# 因为改用https，所以这里改成了使用urllib2模块来读取https网址。
-str = urllib2.urlopen('https://hk.finance.yahoo.com/q/cp?s=%5EDJI%27').read()
-# # 验证过，这里str可以把网页源代码下载下来。
-# print str
-# # 问题在这里，这个re的正则表达式已经没法匹配到数据了。
-# m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\".*?\">(.*?)</a></b></td><td class=\"yfnc_tabledata1\">(.*?)</td>.*?<b>(.*?)</b>.*?</tr>", str)
-m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\"/q?s=AAPL\">AAPL</a></b></td><td class=\"yfnc_tabledata1\">蘋果公司</td><td class=\"yfnc_tabledata1\" align=\"right\"><b>114.060</b>", str)
+# # 下载道琼斯工业平均指数的前三位
+# # str = urllib.urlopen('http://finance.yahoo.com/q/cp?s=%5EDJI+Components').read()
+# # 原来的yahoo英文站改版了，现在使用动态加载而不是原来的html表格版本的数据表示形式，
+# # 因而原来的正则表达式不能匹配，现在改用香港的雅虎财经页面
+# # 因为改用https，所以这里改成了使用urllib2模块来读取https网址。
+# str = urllib2.urlopen('https://hk.finance.yahoo.com/q/cp?s=%5EDJI%27').read()
+# # # 验证过，这里str可以把网页源代码下载下来。
+# # print str
+# # # 问题在这里，这个re的正则表达式已经没法匹配到数据了。
+# # m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\".*?\">(.*?)</a></b></td><td class=\"yfnc_tabledata1\">(.*?)</td>.*?<b>(.*?)</b>.*?</tr>", str)
 
-
-print m
-
-# if m:
-#     #print m
-#     #print"\n"
-#     print len(m)
-#     top.setData(m)
-# else:  
-#     wx.MessageBox('Download failed.', 'Message',  wx.OK | wx.ICON_INFORMATION)
 
 
 # 尝试使用requests模块来解决问题。
@@ -223,8 +212,6 @@ class StockFrame(wx.Frame):
         pass
 
 
-
-
 if __name__ == '__main__':
 
     app = wx.App(False)
@@ -232,10 +219,17 @@ if __name__ == '__main__':
     top = StockFrame("Dow Jones Industrial Average (^DJI)")
     top.Show(True)
 
-    # # 下载道琼斯工业平均指数的前三位
+    # 下载道琼斯工业平均指数的前三位
     # str = urllib.urlopen('http://finance.yahoo.com/q/cp?s=%5EDJI+Components').read()
-    # #print str
+    # 原来的yahoo英文站改版了，现在使用动态加载而不是原来的html表格版本的数据表示形式，
+    # 因而原来的正则表达式不能匹配，现在改用香港的雅虎财经页面
+    # 因为改用https，所以这里改成了使用urllib2模块来读取https网址。
+    str = urllib2.urlopen('https://hk.finance.yahoo.com/q/cp?s=%5EDJI%27').read()
+    # # 验证过，这里str可以把网页源代码下载下来。
+    # print str
+    # # 问题在这里，这个re的正则表达式已经没法匹配到数据了。
     # m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\".*?\">(.*?)</a></b></td><td class=\"yfnc_tabledata1\">(.*?)</td>.*?<b>(.*?)</b>.*?</tr>", str)
+    m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\"/q?s=AAPL\">AAPL</a></b></td><td class=\"yfnc_tabledata1\">蘋果公司</td><td class=\"yfnc_tabledata1\" align=\"right\"><b>114.060</b>", str)
     # if m:
     #     #print m
     #     #print"\n"
