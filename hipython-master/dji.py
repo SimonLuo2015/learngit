@@ -2,7 +2,7 @@
 #import wxversion
 #wxversion.select("2.8")
 import wx
-import urllib
+import urllib2
 import re
 
 from custom_dialogs import ConfigureData
@@ -138,21 +138,22 @@ class StockFrame(wx.Frame):
     def onRefresh(self, event):
         pass
 
-app = wx.App(False)
+if __name__ == '__main__':
+    app = wx.App(False)
 
-top = StockFrame("Dow Jones Industrial Average (^DJI)")
-top.Show(True)
+    top = StockFrame("Dow Jones Industrial Average (^DJI)")
+    top.Show(True)
 
-# 下载道琼斯工业平均指数的前三位
-str = urllib.urlopen('http://finance.yahoo.com/q/cp?s=%5EDJI+Components').read()
-#print str
-m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\".*?\">(.*?)</a></b></td><td class=\"yfnc_tabledata1\">(.*?)</td>.*?<b>(.*?)</b>.*?</tr>", str)
-if m:
-    #print m
-    #print"\n"
-    print len(m)
-    top.setData(m)
-else:  
-    wx.MessageBox('Download failed.', 'Message',  wx.OK | wx.ICON_INFORMATION)
+    # 下载道琼斯工业平均指数的前三位
+    str = urllib2.urlopen('https://hk.finance.yahoo.com/q/cp?s=%5EDJI%27').read()
+    #print str
+    m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\"/q\?s=[A-Z]+\">(\w+)</a></b></td><td class=\"yfnc_tabledata1\">(.*?)</td><td class=\"yfnc_tabledata1\" align=\"right\"><b>(\d*[.,]?\d*)</b>", str)
+    if m:
+        #print m
+        #print"\n"
+        print len(m)
+        top.setData(m)
+    else:  
+        wx.MessageBox('Download failed.', 'Message',  wx.OK | wx.ICON_INFORMATION)
 
-app.MainLoop()
+    app.MainLoop()
