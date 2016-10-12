@@ -136,7 +136,7 @@ class StockFrame(wx.Frame):
         self.Destroy()
         
     def onRefresh(self, event):
-        pass
+        self.Refresh(True)
 
 if __name__ == '__main__':
     app = wx.App(False)
@@ -149,9 +149,9 @@ if __name__ == '__main__':
     #print str
     m = re.findall("<tr><td class=\"yfnc_tabledata1\"><b><a href=\"/q\?s=[A-Z]+\">(\w+)</a></b></td><td class=\"yfnc_tabledata1\">(.*?)</td><td class=\"yfnc_tabledata1\" align=\"right\"><b>(\d*[.,]?\d*)</b>", str)
     if m:
-        #print m
-        #print"\n"
-        print len(m)
+        # print m
+        # print"\n"
+        # print len(m)
         top.setData(m)
     else:  
         wx.MessageBox('Download failed.', 'Message',  wx.OK | wx.ICON_INFORMATION)
