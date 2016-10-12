@@ -1,3 +1,4 @@
+# http://stackoverflow.com/questions/17147156/wxpython-frame-update-with-a-button-click
 import wx
 import random
 
