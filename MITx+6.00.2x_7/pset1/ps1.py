@@ -74,7 +74,7 @@ def greedy_cow_transport(cows,limit=10):
 
 
 # Problem 2
-def brute_force_cow_transport(cows,limit=10):
+def brute_force_cow_transport(cows, limit=10):
     """
     Finds the allocation of cows that minimizes the number of spaceship trips
     via brute force.  The brute force algorithm should follow the following method:
@@ -95,7 +95,28 @@ def brute_force_cow_transport(cows,limit=10):
     trips
     """
     # TODO: Your code here
-    pass
+    # trips = len(cows)
+    # result = [[name] for name in cows.keys()]
+    good_transport = []
+    for possible_transport in get_partitions(cows.keys()):
+        # if len(possible_transport) < trips:
+        transport_avail = True
+        for possible_trip in possible_transport:
+            sum_weight = 0
+            for name in possible_trip:
+                sum_weight += cows[name]
+            if sum_weight > limit:
+                transport_avail = False
+                break
+        if transport_avail:
+            good_transport.append(possible_transport)
+    sorted_transport = sorted(good_transport, key=lambda x: len(x))
+    return sorted_transport[0]
+
+
+
+
+
 
         
 # Problem 3
@@ -126,13 +147,6 @@ cows = load_cows("ps1_cow_data.txt")
 limit = 10
 print(cows)
 
-print(greedy_cow_transport(cows, limit))
+# print(greedy_cow_transport(cows, limit))
 print(brute_force_cow_transport(cows, limit))
 
-
-# def sortedDictValues1(adict):
-#     items = adict.items()
-#     items.sort()
-#     return [value for key, value in items]
-
-# print sortedDictValues1(cows)
