@@ -94,7 +94,7 @@ def brute_force_cow_transport(cows, limit=10):
     transported on a particular trip and the overall list containing all the
     trips
     """
-    # TODO: Your code here
+    # too ugly codes here
     # trips = len(cows)
     # result = [[name] for name in cows.keys()]
     good_transport = []
