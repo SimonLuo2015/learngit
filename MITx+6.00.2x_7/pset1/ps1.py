@@ -134,7 +134,23 @@ def compare_cow_transport_algorithms():
     Does not return anything.
     """
     # TODO: Your code here
-    pass
+    # pass
+    cows = load_cows("ps1_cow_data.txt")
+    limit = 10
+    start1 = time.time()
+    ## code to be timed
+    print(greedy_cow_transport(cows, limit))
+    # print(brute_force_cow_transport(cows, limit))
+    end1 = time.time()
+    print(end1 - start1)
+
+
+    start2 = time.time()
+    ## code to be timed
+    # print(greedy_cow_transport(cows, limit))
+    print(brute_force_cow_transport(cows, limit))
+    end2 = time.time()
+    print(end2 - start2)
 
 
 """
@@ -143,10 +159,11 @@ Do not submit this along with any of your answers. Uncomment the last two
 lines to print the result of your problem.
 """
 
-cows = load_cows("ps1_cow_data.txt")
-limit = 10
-print(cows)
+# cows = load_cows("ps1_cow_data.txt")
+# limit = 10
+# print(cows)
 
 # print(greedy_cow_transport(cows, limit))
-print(brute_force_cow_transport(cows, limit))
+# print(brute_force_cow_transport(cows, limit))
 
+compare_cow_transport_algorithms()
