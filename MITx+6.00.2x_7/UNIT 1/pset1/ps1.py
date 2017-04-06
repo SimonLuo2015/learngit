@@ -133,7 +133,6 @@ def compare_cow_transport_algorithms():
     Returns:
     Does not return anything.
     """
-    # TODO: Your code here
     # pass
     cows = load_cows("ps1_cow_data.txt")
     limit = 10
