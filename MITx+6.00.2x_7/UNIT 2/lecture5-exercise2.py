@@ -16,4 +16,5 @@ def testGenEven(n=100):
         result += str(genEven()) + '-'
     return result
 
-print testGenEven()
+if __name__ == '__main__':
+    print testGenEven()
